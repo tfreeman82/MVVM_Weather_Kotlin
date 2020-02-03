@@ -1,11 +1,10 @@
-package com.tristanfreeman.forcastmvvm.data.db.network.provider.repository
+package com.tristanfreeman.forcastmvvm.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.tristanfreeman.forcastmvvm.data.db.network.provider.repository.response.CurrentWeatherResponse
+import com.tristanfreeman.forcastmvvm.data.network.response.CurrentWeatherResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -33,7 +32,9 @@ interface WeatherStackApiService {
                 val url = chain.request()
                     .url()
                     .newBuilder()
-                    .addQueryParameter("access_key", API_KEY)
+                    .addQueryParameter("access_key",
+                        API_KEY
+                    )
                     .build()
 
                 val request = chain.request()

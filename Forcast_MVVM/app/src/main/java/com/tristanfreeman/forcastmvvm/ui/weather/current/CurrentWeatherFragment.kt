@@ -8,14 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.tristanfreeman.forcastmvvm.R
-import com.tristanfreeman.forcastmvvm.data.db.network.provider.repository.WeatherStackApiService
+import com.tristanfreeman.forcastmvvm.data.network.WeatherStackApiService
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
 
-class CurrentWeatherFragment : Fragment() {
+class CurrentWeatherFragment : Fragment(), KodeinAware {
 
+    override val kodein by closestKodein()
+
+    //private val viewModelFactory: CurrentWe
     companion object {
         fun newInstance() = CurrentWeatherFragment()
     }
@@ -33,7 +39,8 @@ class CurrentWeatherFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
         // TODO: Use the ViewModel
-        val apiService = WeatherStackApiService()
+        val apiService =
+            WeatherStackApiService()
 
         GlobalScope.launch(Dispatchers.Main){
             val currentWeatherResponse = apiService.getCurrentWeather("Raleigh").await()

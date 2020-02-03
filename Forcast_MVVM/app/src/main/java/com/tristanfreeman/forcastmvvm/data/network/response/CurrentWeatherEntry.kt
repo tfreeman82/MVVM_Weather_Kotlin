@@ -1,4 +1,4 @@
-package com.tristanfreeman.forcastmvvm.data.db.network.provider.repository.response
+package com.tristanfreeman.forcastmvvm.data.network.response
 
 
 import com.google.gson.annotations.SerializedName
